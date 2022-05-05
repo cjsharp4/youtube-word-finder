@@ -7,6 +7,7 @@ import os
 import pathlib #pip install pathlib
 from csv import reader
 import time
+import shutil
 
 
 """
@@ -109,10 +110,11 @@ def saveClip(clip_name,folder_name,phoneme):
 
     pathlib.Path(destination_folder).mkdir(parents=True, exist_ok=True)
 
-    os.rename(current_filepath, destination_filepath)
+    shutil.move(current_filepath, destination_filepath)
+    #os.rename(current_filepath, destination_filepath)
 
 
-def scrape():
+def scrape(words):
 
     """
     example video link:
@@ -130,10 +132,10 @@ def scrape():
     video_link_list , video_id_list = getLinks()
     
     #list of words that we are looking to find in the video 
-    ee_uh_words = [ ["street","(EE)"] ]
+    target_words = words
 
-    #get list of ee_uh_words without the phoneme as a tuple
-    ee_uh = [x[0] for x in ee_uh_words]
+    #get list of target_words without the phoneme as a tuple
+    ee_uh = [x[0] for x in target_words]
     ee_uh = [x.lower() for x in ee_uh]
 
 
@@ -172,7 +174,7 @@ def scrape():
                     word_index = 0
                     for word in ee_uh:
                         if(word in transcript_section):
-                            phoneme = ee_uh_words[word_index][1]
+                            phoneme = target_words[word_index][1]
                             which_word = word
                         word_index += 1
 
@@ -266,7 +268,8 @@ def scrape():
 def main():
     start = time.time()
 
-    scrape()
+    words = [ ["street","(EE)"] ]
+    scrape(words)
 
     #Print number of links analyzed and total elapsed time of script
     end = time.time()
