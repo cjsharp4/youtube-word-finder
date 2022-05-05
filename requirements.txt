@@ -1,0 +1,7 @@
+pip install youtube_transcript_api
+pip install pytube
+pip install moviepy
+pip install numpy
+pip install opencv-python
+pip install pathlib
+pip install requests
