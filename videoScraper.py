@@ -8,6 +8,7 @@ import pathlib #pip install pathlib
 from csv import reader
 import time
 import shutil
+import sys
 
 
 """
@@ -268,7 +269,11 @@ def scrape(words):
 def main():
     start = time.time()
 
-    words = [ ["street","(EE)"] ]
+    #get target words from node js 
+    js_arg = str(sys.argv[1])
+    js_arg = js_arg.lower()
+
+    words = [ [js_arg,"(EE)"] ]
     scrape(words)
 
     #Print number of links analyzed and total elapsed time of script
