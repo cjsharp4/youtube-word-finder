@@ -2,7 +2,7 @@
 
 Web Application that can provide a video of any word being used in a sentence. Uses Node.js and Express.js to host the video results and communicate with the web scraper built using Python.
 
-To run, navigate to the unzipped project folder in the terminal and run the command ``npm init -y`` to install all dependancies.
+To run, navigate to the unzipped project folder in the terminal and run the command ``npm init -y`` and ``pip install -r requirements.txt`` to install all dependancies.
 Use command ``node index.js`` to start the node js server on http://localhost:3000. 
 
 
