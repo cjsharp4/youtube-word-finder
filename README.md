@@ -10,6 +10,6 @@ Use command ``node index.js`` to start the node js server on http://localhost:30
 
 ![Screen Shot 2022-06-22 at 12 09 44 PM](https://user-images.githubusercontent.com/65328908/175117318-20a475ca-c80c-4a99-b291-623895d2c2e2.png)
 
-Results may take a couple minutes to load as the video scraper works in the background to search through hundreds of YouTube videos
+Results may take a couple minutes to load as the video scraper works in the background to search through hundreds of YouTube videos.
 
 ![Screen Shot 2022-06-22 at 12 15 33 PM](https://user-images.githubusercontent.com/65328908/175118300-cd4b653d-351a-440d-85e1-0e7cdd56198d.png)
