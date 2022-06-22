@@ -9,27 +9,8 @@ from csv import reader
 import time
 import shutil
 import sys
+import random
 
-
-"""
-def csvLinks():
-    # open file in read mode
-    with open('links.csv', 'r') as read_obj:
-        # pass the file object to reader() to get the reader object
-        csv_reader = reader(read_obj)
-        # Iterate over each row in the csv using reader object
-        video_id_list = []
-        video_link_list = []
-        for row in csv_reader:
-            #iterate through first row 
-            for i in range(0,len(row)):
-                #check if row is empty 
-                if row[i]:
-                    #get video link 
-                    video_link_list.append(row[i])
-                    #get video id
-                    video_id_list.append(row[i].split("v=",1)[1]) 
-"""
 
 def getLinks():
     with open('random_youtube_database.txt') as text_file:
@@ -95,21 +76,28 @@ def saveClip(clip_name,folder_name,phoneme):
 
     current_filepath = cwd + '/' + clip_name
 
+    """
     #gets directory for proper folder based on word's phoneme
 
     phoneme_folder = cwd + '/'
 
-    print("Phoneme: " , phoneme, " || " , phoneme_folder)
+    #print("Phoneme: " , phoneme, " || " , phoneme_folder)
 
+    
     if(phoneme == "(EE)"):
         phoneme_folder += "EE_Videos"
     else:
         phoneme_folder += "UH_Videos"
+    
 
     destination_folder = phoneme_folder + '/' + folder_name
     destination_filepath = destination_folder + '/' + clip_name
 
     pathlib.Path(destination_folder).mkdir(parents=True, exist_ok=True)
+    
+    """
+
+    destination_filepath = cwd + "/public/" + clip_name
 
     shutil.move(current_filepath, destination_filepath)
     #os.rename(current_filepath, destination_filepath)
@@ -144,6 +132,8 @@ def scrape(words):
     #GET https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=surfing&key=[YOUR_API_KEY] HTTP/1.1
 
     test_counter = 0
+
+    random.shuffle(video_link_list)
     
     for link in range(0,len(video_link_list)):
         
@@ -152,7 +142,9 @@ def scrape(words):
         video_link = video_link_list[link]  
         
         try:
-            root = YouTubeTranscriptApi.get_transcript(video_id_list[link])
+            #root = YouTubeTranscriptApi.get_transcript(video_id_list[link])
+            video_id = video_link[32:]
+            root = YouTubeTranscriptApi.get_transcript(video_id)
         except:
             root = "fail"
 
@@ -215,7 +207,9 @@ def scrape(words):
                     clip = clip.subclip(start, end)
 
                     #name file with video's title, the target word found, and number of clip within an individual video 
-                    clip_name = phoneme + "-(" + which_word + ")_" + video_title + "_clip" + str(clip_number) + ".mp4"
+                    #clip_name = phoneme + "-(" + which_word + ")_" + video_title + "_clip" + str(clip_number) + ".mp4"
+                    clip_name = "targetWord.mp4"
+
                     clip_number += 1
                     folder_name = video_title
 
