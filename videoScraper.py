@@ -221,7 +221,8 @@ def scrape(words):
                     clip.close()
 
                     #if a face is detected for at least 80% of the video
-                    if(faceDetect(clip_name)):
+                    #if(faceDetect(clip_name)):
+                    if(True):
 
                         #save clip in folder with video's title
                         saveClip(clip_name,folder_name,phoneme)
